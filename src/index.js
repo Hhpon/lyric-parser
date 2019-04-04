@@ -52,8 +52,9 @@ export default class Lyric {
         let _tridResult = 0
         if (tridResult.length === 3) {
           _tridResult = parseInt(tridResult)
+        } else {
+          _tridResult = tridResult * 10
         }
-        _tridResult = tridResult * 10
         if (txt) {
           this.lines.push({
             time:

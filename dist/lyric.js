@@ -293,8 +293,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             var _tridResult = 0;
             if (tridResult.length === 3) {
               _tridResult = parseInt(tridResult);
+            } else {
+              _tridResult = tridResult * 10;
             }
-            _tridResult = tridResult * 10;
             if (txt) {
               this.lines.push({
                 time: result[1] * 60 * 1000 + result[2] * 1000 + _tridResult,
