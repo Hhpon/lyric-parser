@@ -289,9 +289,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           var result = timeExp.exec(line);
           if (result) {
             var txt = line.replace(timeExp, '').trim();
+            var tridResult = result[3] || '0';
+            var _tridResult = 0;
+            if (tridResult.length === 3) {
+              _tridResult = parseInt(tridResult);
+            }
+            _tridResult = tridResult * 10;
             if (txt) {
               this.lines.push({
-                time: result[1] * 60 * 1000 + result[2] * 1000 + (result[3] || 0).substring(0, 2) * 10,
+                time: result[1] * 60 * 1000 + result[2] * 1000 + _tridResult,
                 txt: txt
               });
             }
