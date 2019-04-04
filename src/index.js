@@ -1,4 +1,5 @@
 const timeExp = /\[(\d{2,}):(\d{2})(?:\.(\d{2,3}))?]/g
+// '[00:04.34]曲：周以力'
 
 const STATE_PAUSE = 0
 const STATE_PLAYING = 1
@@ -11,8 +12,7 @@ const tagRegMap = {
   by: 'by'
 }
 
-function noop() {
-}
+function noop() {}
 
 export default class Lyric {
   constructor(lrc, hanlder = noop) {
@@ -34,8 +34,10 @@ export default class Lyric {
 
   _initTag() {
     for (let tag in tagRegMap) {
-      const matches = this.lrc.match(new RegExp(`\\[${tagRegMap[tag]}:([^\\]]*)]`, 'i'))
-      this.tags[tag] = matches && matches[1] || ''
+      const matches = this.lrc.match(
+        new RegExp(`\\[${tagRegMap[tag]}:([^\\]]*)]`, 'i')
+      )
+      this.tags[tag] = (matches && matches[1]) || ''
     }
   }
 
@@ -48,7 +50,8 @@ export default class Lyric {
         const txt = line.replace(timeExp, '').trim()
         if (txt) {
           this.lines.push({
-            time: result[1] * 60 * 1000 + result[2] * 1000 + (result[3] || 0) * 10,
+            time:
+              result[1] * 60 * 1000 + result[2] * 1000 + (result[3] || 0).substring(0, 2) * 10,
             txt
           })
         }
